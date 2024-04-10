@@ -1,8 +1,8 @@
-import ProductFactory from "./product.factory";
+import ProductFactoryWithType from "./product.factorywithtype";
 
 describe("Product factory unit test", () => {
   it("should create a proct type a", () => {
-    const product = ProductFactory.create("a", "Product A", 1);
+    const product = ProductFactoryWithType.create("a", "Product A", 1);
 
     expect(product.id).toBeDefined();
     expect(product.name).toBe("Product A");
@@ -11,7 +11,7 @@ describe("Product factory unit test", () => {
   });
 
   it("should create a proct type b", () => {
-    const product = ProductFactory.create("b", "Product B", 1);
+    const product = ProductFactoryWithType.create("b", "Product B", 1);
 
     expect(product.id).toBeDefined();
     expect(product.name).toBe("Product B");
@@ -20,7 +20,7 @@ describe("Product factory unit test", () => {
   });
 
   it("should throw an error when product type is not supported", () => {
-    expect(() => ProductFactory.create("c", "Product C", 1)).toThrowError(
+    expect(() => ProductFactoryWithType.create("c", "Product C", 1)).toThrowError(
       "Product type not supported"
     );
   });
