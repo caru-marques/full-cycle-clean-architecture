@@ -1,6 +1,6 @@
 import Notification from "./notification";
 
-describe("Unit testss for notifications", () => {
+describe("Unit tests for notifications", () => {
   it("should create errors", () => {
     const notification = new Notification();
     const error = {
@@ -56,5 +56,40 @@ describe("Unit testss for notifications", () => {
     notification.addError(error);
 
     expect(notification.getErrors()).toEqual([error]);
+  });
+
+  it('should create error for products', () => {
+    const notification = new Notification();
+    const error = {
+      message: "Id is required",
+      context: "product",
+    };
+    notification.addError(error);
+
+    expect(notification.messages("product")).toBe("product: Id is required,");
+
+    const error2 = {
+      message: "Name is required",
+      context: "product",
+    };
+    notification.addError(error2);
+
+    expect(notification.messages("product")).toBe(
+      "product: Id is required,product: Name is required,"
+    );
+
+    const error3 = {
+      message: "Customer error",
+      context: "customer",
+    };
+    notification.addError(error3);
+
+    expect(notification.messages("product")).toBe(
+      "product: Id is required,product: Name is required,"
+    );
+    expect(notification.messages()).toBe(
+      "product: Id is required,product: Name is required,customer: Customer error,"
+    );
+  
   });
 });
